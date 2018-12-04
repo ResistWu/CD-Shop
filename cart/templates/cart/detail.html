@@ -1,0 +1,166 @@
+{% extends "shop/base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block title %}
+    Your shopping cart
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <img src="{% static "img/shopping_cart48.svg" %}" alt="">
+    <img src="{% static "img/shopping_cart32.svg" %}" alt="">
+    <img src="{% static "img/shopping_cart16.svg" %}" alt="">
+<br><br>
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Total</th>
+                    <th> </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in cart %}
+                    {% with product=item.product %}
+                        <tr>
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <a class="thumbnail pull-left" href="{{ product.get_absolute_url }}">
+                                        <img class="media-object"
+                                             src="{% if product.image %}{{ product.image.url }}
+                                                  {% else %}{% static "img/no_image.png" %}{% endif %}"
+                                             style="width: 72px; height: 72px;">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a
+                                                href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
+                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                    {% csrf_token %}
+                                    {% bootstrap_field item.update_quantity_form.quantity show_label=False %}
+                                    {% bootstrap_field item.update_quantity_form.update %}
+                                    {% buttons %}
+                                        <button type="submit" class="btn btn-success btn-product">
+                                            Update
+                                        </button>
+                                    {% endbuttons %}
+                                </form>
+                            </td>
+
+                            <td class="col-sm-1 col-md-1 text-center"><strong>${{ item.price }}</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>${{ item.total_price }}</strong></td>
+
+                            <td class="col-sm-1 col-md-1">
+                                <a href="{% url "cart:cart_remove" product.id %}" class="btn btn-danger">
+                                    <i class="glyphicon glyphicon-remove" aria-hidden="true"></i> Remove
+                                </a>
+                            </td>
+                        </tr>
+                    {% endwith %}
+                {% endfor %}
+                <tr>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td><h3>Total</h3></td>
+                    <td class="text-right"><h3><strong>${{ cart.get_total_price }}</strong></h3></td>
+                </tr>
+                <tr>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>
+                        <a href="{% url "shop:product_list" %}" class="btn btn-default">
+                            Continue Shopping <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url "orders:order_create" %}" class="btn btn-default">Checkout <i
+                                class="glyphicon glyphicon-play" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ph"></div>
+</div>
+    <footer class="footer">
+         <div class="container small-sm">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/"><img src="{% static "img/CDfooter32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <p>The best CD Shop that can satisfy all your needs.&nbsp&nbsp<img src="{% static "img/unicorn24.svg" %}" alt=""></p>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-2">
+                    <a href="/"><img src="{% static "img/address32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <ul>
+                        <li>
+                            <a href="https://www.google.com.ua/maps/@22.303760, 114.179220">11號 Yuk Choi Rd, Hung Hom</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-2 col-md-offset-1">
+                    <a href="/"><img src="{% static "img/contact32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <ul>
+                        <li>
+                            <a href="tel:+380982367536">+852 19880416</a>
+                        </li>
+                        <li>
+                            <a href="mailto:18075468g@connect.polyu.hk">18075468g@connect.polyu.hk</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-3 col-md-offset-1">
+                    <a href="/"><img src="{% static "img/follow32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h15-xs h25-md"></div>
+                    <div class="follow">
+                        <div class="row">
+                          <div class="col-md-3">
+                               <a class="item" href="#" target="_blank"><i class="fa fa-instagram"></i></a>
+                          </div>
+                          <div class="col-md-3">
+                              <a class="item" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                          </div>
+                          <div class="col-md-3">
+                              <a class="item" href="#" target="_blank"><i class="fa fa-pinterest-p"></i></a>
+                          </div>
+                            <div class="col-md-3">
+                                <a class="item" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="empty-space h25-xs"></div>
+            <div class="copyright">
+                © COPYRIGHT ResistWu_51 <a class="item" href="https://github.com/ResistWu/Markdown_Fig" target="_blank"><img src="{% static "img/github24.svg" %}" alt=""></a>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

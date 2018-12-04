@@ -1,0 +1,114 @@
+{% extends "shop/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="content">
+        <div class="row">
+        <div class="col-md-3">
+            <h3><img src="{% static "img/iconfont-categoryfill.svg" %}">&nbsp&nbspCategories</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li {% if not category %}class="active"{% endif %}>
+                    <a href="{% url "shop:product_list" %}"><img src="{% static "img/cd32.svg" %}"> </a></li>
+                {% for c in categories %}
+                    <li {% if category.slug == c.slug %}class="active"{% endif %}>
+                        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        <div class="col-md-9">
+            <h2>{% if category %}<img src="{% static "img/fangcd16.svg" %}">&nbsp&nbsp{{ category.name }}{% else %}<img src="{% static "img/fangcd16.svg" %}">&nbsp&nbspProducts{% endif %}</h2>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="{{ product.get_absolute_url }}">
+                                <img src="{% if product.image %}{{ product.image.url }}
+                                          {% else %}{% static "img/no_image.png" %} {% endif %}">
+                            </a>
+                            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                            ${{ product.price }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="ph"></div>
+  </div>
+
+
+    <footer class="footer">
+         <div class="container small-sm">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/"><img src="{% static "img/CDfooter32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <p>The best CD Shop that can satisfy all your needs.&nbsp&nbsp<img src="{% static "img/unicorn24.svg" %}" alt=""></p>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-2">
+                    <a href="/"><img src="{% static "img/address32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <ul>
+                        <li>
+                            <a href="https://www.google.com.ua/maps/@22.303760, 114.179220">11號 Yuk Choi Rd, Hung Hom</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-2 col-md-offset-1">
+                    <a href="/"><img src="{% static "img/contact32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <ul>
+                        <li>
+                            <a href="tel:+380982367536">+852 19880416</a>
+                        </li>
+                        <li>
+                            <a href="mailto:18075468g@connect.polyu.hk">18075468g@connect.polyu.hk</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-3 col-md-offset-1">
+                    <a href="/"><img src="{% static "img/follow32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h15-xs h25-md"></div>
+                    <div class="follow">
+                        <div class="row">
+                          <div class="col-md-3">
+                               <a class="item" href="#" target="_blank"><i class="fa fa-instagram"></i></a>
+                          </div>
+                          <div class="col-md-3">
+                              <a class="item" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                          </div>
+                          <div class="col-md-3">
+                              <a class="item" href="#" target="_blank"><i class="fa fa-pinterest-p"></i></a>
+                          </div>
+                            <div class="col-md-3">
+                                <a class="item" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="empty-space h25-xs"></div>
+            <div class="copyright">
+                © COPYRIGHT ResistWu_51 <a class="item" href="https://github.com/ResistWu/Markdown_Fig" target="_blank"><img src="{% static "img/github24.svg" %}" alt=""></a>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

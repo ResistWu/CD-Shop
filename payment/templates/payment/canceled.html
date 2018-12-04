@@ -1,0 +1,80 @@
+{% extends "shop/base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="content">
+        <div class="pay">
+              <h1><img src="{% static "img/cancel96.svg" %}"></h1>
+                <br>
+              <h3>Your payment has been canceled!&nbsp&nbsp<img src="{% static "img/sad-tear32.svg" %}" alt=""></h3>
+        </div>
+        <div class="ph"></div>
+    </div>
+
+    <footer class="footer">
+         <div class="container small-sm">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/"><img src="{% static "img/CDfooter32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <p>The best CD Shop that can satisfy all your needs.&nbsp&nbsp<img src="{% static "img/unicorn24.svg" %}" alt=""></p>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-2">
+                    <a href="/"><img src="{% static "img/address32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <ul>
+                        <li>
+                            <a href="https://www.google.com.ua/maps/@22.303760, 114.179220">11號 Yuk Choi Rd, Hung Hom</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-2 col-md-offset-1">
+                    <a href="/"><img src="{% static "img/contact32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h10-xs"></div>
+                    <ul>
+                        <li>
+                            <a href="tel:+380982367536">+852 19880416</a>
+                        </li>
+                        <li>
+                            <a href="mailto:18075468g@connect.polyu.hk">18075468g@connect.polyu.hk</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="empty-space h20-xs h0-md"></div>
+                <div class="col-md-3 col-md-offset-1">
+                    <a href="/"><img src="{% static "img/follow32.svg" %}" alt=""></a>
+                    <br>
+                    <br>
+                    <div class="empty-space h15-xs h25-md"></div>
+                    <div class="follow">
+                        <div class="row">
+                          <div class="col-md-3">
+                               <a class="item" href="#" target="_blank"><i class="fa fa-instagram"></i></a>
+                          </div>
+                          <div class="col-md-3">
+                              <a class="item" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                          </div>
+                          <div class="col-md-3">
+                              <a class="item" href="#" target="_blank"><i class="fa fa-pinterest-p"></i></a>
+                          </div>
+                            <div class="col-md-3">
+                                <a class="item" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="empty-space h25-xs"></div>
+            <div class="copyright">
+                © COPYRIGHT ResistWu_51 <a class="item" href="https://github.com/ResistWu/Markdown_Fig" target="_blank"><img src="{% static "img/github24.svg" %}" alt=""></a>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

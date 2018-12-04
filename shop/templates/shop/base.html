@@ -1,0 +1,64 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <div class="row">
+          <div class="col-md-5">
+              <img src="{% static "img/cdr64.svg" %}">
+              <img src="{% static "img/cdo64.svg" %}">
+              <img src="{% static "img/cdy64.svg" %}">
+              <img src="{% static "img/cdg64.svg" %}">
+              <img src="{% static "img/cdb64.svg" %}">
+              <img src="{% static "img/cdp64.svg" %}">
+          </div>
+          <div class="col-md-2">
+              <a href="/"><h1>CD Shop</h1></a>
+          </div>
+          <div class="col-md-5">
+              <img src="{% static "img/cdp64.svg" %}">
+              <img src="{% static "img/cdb64.svg" %}">
+              <img src="{% static "img/cdg64.svg" %}">
+              <img src="{% static "img/cdy64.svg" %}">
+              <img src="{% static "img/cdo64.svg" %}">
+              <img src="{% static "img/cdr64.svg" %}">
+          </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {# call __len__ #}
+            {% with total_items=cart|length %}
+                {% if cart|length > 0 %}
+                    Your cart:
+                    <a href="{% url "cart:cart_detail" %}">
+                        {# If total_items is 1, the output will be 1 item. #}
+                        {# If total_items is 2, the output will be 2 items. #}
+                        {{ total_items }} item{{ total_items|pluralize }},
+                        ${{ cart.get_total_price }}
+                    </a>
+                {% else %}
+                    Your shopping cart is empty.
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
